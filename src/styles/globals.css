@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-heading: "Geist", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: oklch(0.129 0.007 272);
+  --color-foreground: oklch(0.95 0 0);
+  --color-muted: oklch(0.55 0 0);
+  --color-primary: oklch(0.65 0.2 265);
+  --color-primary-glow: oklch(0.6 0.18 240);
+  --color-card: oklch(0.17 0.01 272);
+  --color-card-hover: oklch(0.2 0.012 272);
+  --color-border: oklch(1 0 0 / 8%);
+  --color-border-hover: oklch(1 0 0 / 12%);
+  --color-section-alt: oklch(0.14 0.008 272);
+
+  --radius-card: 1rem;
+  --radius-button: 0.75rem;
+}
+
+/* Brand utilities */
+.glass {
+  background: oklch(1 0 0 / 5%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid oklch(1 0 0 / 8%);
+}
+
+.glass-strong {
+  background: oklch(1 0 0 / 8%);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid oklch(1 0 0 / 12%);
+}
+
+.glass-card {
+  background: oklch(1 0 0 / 3%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid oklch(1 0 0 / 6%);
+  border-radius: var(--radius-card);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: oklch(1 0 0 / 5%);
+  border-color: oklch(1 0 0 / 12%);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px oklch(0 0 0 / 30%), 0 0 0 1px oklch(0.65 0.2 265 / 5%);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, oklch(0.95 0 0), oklch(0.7 0.15 265));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cta {
+  background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: var(--radius-button);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: white;
+  background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+  box-shadow: 0 0 20px oklch(0.6 0.18 240 / 20%), 0 4px 12px oklch(0 0 0 / 30%);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 30px oklch(0.6 0.18 240 / 30%), 0 8px 20px oklch(0 0 0 / 40%);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: var(--radius-button);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--color-foreground);
+  border: 1px solid oklch(1 0 0 / 12%);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  border-color: oklch(1 0 0 / 25%);
+  background: oklch(1 0 0 / 5%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scroll-triggered animation */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+[data-animate].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.stagger-children > [data-animate] {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.stagger-children > [data-animate].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Grid dot overlay */
+.dot-grid {
+  background-image: radial-gradient(oklch(1 0 0 / 6%) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Breathing gradient */
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate-breathe {
+  animation: breathe 8s ease-in-out infinite;
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.6 0.18 240 / 20%); }
+  50% { box-shadow: 0 0 40px oklch(0.6 0.18 240 / 35%); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Section label */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(0.65 0.2 265);
+  margin-bottom: 1rem;
+}
+
+.section-label::before {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, oklch(0.65 0.2 265 / 60%), transparent);
+}
+
+/* Count animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(1rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Connecting line */
+.step-line {
+  position: relative;
+}
+
+.step-line::after {
+  content: "";
+  position: absolute;
+  top: 2rem;
+  left: calc(50% + 2rem);
+  width: calc(100% - 4rem);
+  height: 1px;
+  background: linear-gradient(90deg, oklch(0.6 0.18 240 / 40%), oklch(0.65 0.2 265 / 20%));
+}
+
+/* Traffic lights */
+.traffic-light {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(1 0 0 / 10%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(1 0 0 / 20%);
+}

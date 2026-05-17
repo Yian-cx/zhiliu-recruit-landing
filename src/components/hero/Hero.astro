@@ -1,0 +1,98 @@
+---
+import { DOWNLOAD_URL } from "../../data/site";
+import GradientText from "../ui/GradientText.astro";
+import Button from "../ui/Button.astro";
+---
+
+<!-- Hero Section -->
+<section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+  <!-- Background layers -->
+  <div class="absolute inset-0">
+    <div
+      class="absolute inset-0 animate-breathe"
+      style="background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.6 0.2 240 / 18%) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 20% 70%, oklch(0.65 0.2 265 / 10%) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, oklch(0.55 0.15 200 / 6%) 0%, transparent 40%),
+        var(--color-background)"
+    ></div>
+    <div class="absolute inset-0 dot-grid opacity-40"></div>
+  </div>
+
+  <!-- Decorative orbs -->
+  <div class="absolute top-1/4 -left-32 w-96 h-96 rounded-full blur-[120px] opacity-20"
+    style="background: radial-gradient(circle, oklch(0.6 0.2 240 / 30%), transparent)"></div>
+  <div class="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full blur-[120px] opacity-15"
+    style="background: radial-gradient(circle, oklch(0.65 0.2 265 / 25%), transparent)"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 flex flex-col items-center text-center px-4 pt-32 pb-16">
+    <div data-animate class="mb-6">
+      <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium text-foreground/70">
+        <span class="size-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        现已支持 macOS · 免费下载
+      </span>
+    </div>
+
+    <GradientText as="h1" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl max-w-4xl leading-[1.05]">
+      智能求职工作台
+    </GradientText>
+
+    <p data-animate class="mt-6 text-lg sm:text-xl text-foreground/50 max-w-2xl leading-relaxed" style="transition-delay: 150ms">
+      AI 驱动的求职全流程管理 — 从岗位追踪到面试准备，一站式搞定。
+    </p>
+
+    <div data-animate class="mt-10 flex items-center gap-4 flex-wrap justify-center" style="transition-delay: 300ms">
+      <Button href={DOWNLOAD_URL} variant="primary" class="!px-8 !py-3.5 !text-base animate-pulse-glow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        免费下载 macOS 版
+      </Button>
+      <Button href="#features" variant="secondary">
+        了解更多
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </Button>
+    </div>
+
+    <!-- App Mockup -->
+    <div data-animate class="mt-16 relative" style="transition-delay: 500ms">
+      <!-- Shadow card behind -->
+      <div class="absolute -bottom-3 -right-3 w-full h-full rounded-2xl bg-white/[0.03] border border-white/[0.05] -z-10"></div>
+      <div class="absolute -bottom-6 -right-6 w-full h-full rounded-2xl bg-white/[0.02] border border-white/[0.03] -z-20"></div>
+
+      <!-- Mockup window -->
+      <div class="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl animate-float"
+        style="box-shadow: 0 40px 80px oklch(0 0 0 / 50%), 0 0 0 1px oklch(0.65 0.2 265 / 8%)">
+        <!-- Title bar -->
+        <div class="flex items-center gap-2 h-10 px-4 bg-white/[0.04] border-b border-white/[0.06]">
+          <span class="traffic-light bg-[#FF5F57]"></span>
+          <span class="traffic-light bg-[#FEBC2E]"></span>
+          <span class="traffic-light bg-[#28C840]"></span>
+          <span class="flex-1 text-center text-[11px] text-foreground/30 mr-12">职流 · AI 求职工作台</span>
+        </div>
+        <!-- App Screenshot -->
+        <div class="bg-[#0d0d11] aspect-[16/10] w-[720px] max-w-full">
+          <img
+            src="/screenshots/仪表盘.png"
+            alt="职流 AI 求职工作台 - 仪表盘界面"
+            class="w-full h-auto"
+            width="720"
+            height="450"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+    <span class="text-[10px] text-foreground/30 tracking-widest uppercase">Scroll</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="oklch(1 0 0 / 30%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+    </svg>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+---
+export interface Props {
+  delay?: number;
+  class?: string;
+}
+
+const { delay = 0, class: className = "" } = Astro.props;
+---
+
+<div
+  data-animate
+  style:list={[`transition-delay: ${delay}ms`]}
+  class:list={[className]}
+>
+  <slot />
+</div>

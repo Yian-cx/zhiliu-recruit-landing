@@ -1,0 +1,84 @@
+---
+import { stats } from "../../data/stats";
+import SectionLabel from "../ui/SectionLabel.astro";
+import GradientText from "../ui/GradientText.astro";
+---
+
+<!-- Stats Section -->
+<section id="stats" class="relative py-24 md:py-32 overflow-hidden">
+  <div class="absolute inset-0" style="background: var(--color-background)"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[200px] opacity-8"
+    style="background: radial-gradient(circle, oklch(0.6 0.18 240 / 12%), transparent)"></div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div data-animate>
+        <SectionLabel label="Stats" />
+      </div>
+      <div data-animate style="transition-delay: 100ms">
+        <GradientText as="h2" class="text-4xl sm:text-5xl md:text-6xl">
+          数据驱动求职
+        </GradientText>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      {stats.map((stat, i) => (
+        <div data-animate class="text-center" style={`transition-delay: ${i * 100}ms`}>
+          <div
+            class="text-4xl sm:text-5xl font-bold gradient-text-cta mb-2"
+            data-count={String(stat.target)}
+            data-duration="2000"
+          >0</div>
+          <div class="text-sm text-foreground/40">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  function animateCount(el: HTMLElement) {
+    const target = parseInt(el.dataset.count || "0");
+    const duration = parseInt(el.dataset.duration || "2000");
+    const start = performance.now();
+
+    function tick(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+
+      if (target >= 1000) {
+        el.textContent = current.toLocaleString() + (el.textContent?.includes("%") ? "%" : el.textContent?.includes("x") ? "x" : "+");
+      } else if (target === 95) {
+        el.textContent = current + "%";
+      } else if (target === 3) {
+        el.textContent = current + "x";
+      } else {
+        el.textContent = current.toLocaleString();
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        const suffix = target >= 10000 ? "+" : target === 95 ? "%" : target === 3 ? "x" : "";
+        el.textContent = target.toLocaleString() + suffix;
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target as HTMLElement;
+        animateCount(el);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll("[data-count]").forEach((el) => observer.observe(el));
+</script>

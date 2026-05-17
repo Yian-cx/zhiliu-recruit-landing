@@ -1,0 +1,19 @@
+---
+export interface Props {
+  variant?: "primary" | "secondary";
+  href?: string;
+  class?: string;
+}
+
+const { variant = "primary", href, class: className = "" } = Astro.props;
+const Tag = href ? "a" : "button";
+const btnClass = variant === "primary" ? "btn-primary" : "btn-secondary";
+---
+
+<Tag
+  {href && { href }}
+  class:list={[btnClass, className]}
+  {...(Tag === "button" ? { type: "button" } : {})}
+>
+  <slot />
+</Tag>

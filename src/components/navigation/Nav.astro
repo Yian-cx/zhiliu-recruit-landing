@@ -1,0 +1,81 @@
+---
+import { DOWNLOAD_URL } from "../../data/site";
+// Navigation — fixed top bar with glass effect on scroll
+---
+
+<nav
+  id="nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2.5 group">
+        <span class="size-8 rounded-lg flex items-center justify-center shrink-0"
+          style="background: linear-gradient(135deg, #0EA5E9, #3B82F6)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </span>
+        <span class="text-sm font-bold tracking-tight gradient-text-cta">ZhiLiu</span>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#features" class="text-sm text-foreground/60 hover:text-foreground transition-colors">功能</a>
+        <a href="#demo" class="text-sm text-foreground/60 hover:text-foreground transition-colors">演示</a>
+        <a href="#how-it-works" class="text-sm text-foreground/60 hover:text-foreground transition-colors">流程</a>
+        <a href="#download" class="text-sm text-foreground/60 hover:text-foreground transition-colors">下载</a>
+        <a href={DOWNLOAD_URL} class="btn-primary !py-2 !px-5 !text-sm">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          免费下载
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button id="mobile-toggle" class="md:hidden p-2 text-foreground/60 hover:text-foreground transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden pb-4 space-y-2">
+      <a href="#features" class="block px-3 py-2 text-sm text-foreground/60 hover:text-foreground rounded-lg hover:bg-white/5 transition-colors">功能</a>
+      <a href="#demo" class="block px-3 py-2 text-sm text-foreground/60 hover:text-foreground rounded-lg hover:bg-white/5 transition-colors">演示</a>
+      <a href="#how-it-works" class="block px-3 py-2 text-sm text-foreground/60 hover:text-foreground rounded-lg hover:bg-white/5 transition-colors">流程</a>
+      <a href="#download" class="block px-3 py-2 text-sm text-foreground/60 hover:text-foreground rounded-lg hover:bg-white/5 transition-colors">下载</a>
+      <a href={DOWNLOAD_URL} class="btn-primary w-full justify-center !py-2 !text-sm mt-2">免费下载</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById("nav");
+  const toggle = document.getElementById("mobile-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  // Scroll glass effect
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) {
+      nav?.classList.add("glass-strong");
+      nav?.classList.add("border-b", "border-white/[0.06]");
+    } else {
+      nav?.classList.remove("glass-strong");
+      nav?.classList.remove("border-b", "border-white/[0.06]");
+    }
+  }, { passive: true });
+
+  // Mobile toggle
+  toggle?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+  });
+
+  // Close mobile menu on link click
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => menu.classList.add("hidden"));
+  });
+</script>

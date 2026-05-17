@@ -1,0 +1,49 @@
+---
+import { steps } from "../../data/steps";
+import SectionLabel from "../ui/SectionLabel.astro";
+import GradientText from "../ui/GradientText.astro";
+---
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="relative py-24 md:py-32 overflow-hidden">
+  <div class="absolute inset-0" style="background: var(--color-background)"></div>
+  <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-[150px] opacity-10"
+    style="background: radial-gradient(circle, oklch(0.6 0.18 240 / 20%), transparent)"></div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-16 md:mb-20">
+      <div data-animate>
+        <SectionLabel label="How It Works" />
+      </div>
+      <div data-animate style="transition-delay: 100ms">
+        <GradientText as="h2" class="text-4xl sm:text-5xl md:text-6xl">
+          三步搞定求职
+        </GradientText>
+      </div>
+      <p data-animate class="mt-4 text-lg text-foreground/40 max-w-xl mx-auto" style="transition-delay: 200ms">
+        简化流程，专注面试准备
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 relative">
+      <!-- Connecting line (desktop) -->
+      <div class="hidden md:block absolute top-10 left-[calc(16.67%+2rem)] right-[calc(16.67%+2rem)] h-px"
+        style="background: linear-gradient(90deg, oklch(0.6 0.18 240 / 40%), oklch(0.65 0.2 265 / 40%))"></div>
+
+      {steps.map((step, i) => (
+        <div data-animate class="relative text-center" style={`transition-delay: ${i * 150}ms`}>
+          <!-- Number + Icon -->
+          <div class="relative z-10 mx-auto mb-6 size-20 rounded-2xl flex items-center justify-center glass-card"
+            style="box-shadow: 0 0 40px oklch(0.65 0.2 265 / 10%)">
+            <span class="text-2xl font-bold gradient-text-cta">{step.number}</span>
+          </div>
+
+          <h3 class="text-lg font-semibold text-foreground mb-2">{step.title}</h3>
+          <p class="text-sm text-foreground/40 leading-relaxed max-w-xs mx-auto">{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

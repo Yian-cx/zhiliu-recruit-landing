@@ -1,0 +1,76 @@
+---
+import "../styles/globals.css";
+
+const title = "职流 (ZhiLiu) - AI 求职工作台";
+const description = "AI 驱动的求职全流程管理桌面应用。从岗位追踪到面试准备，一站式搞定。支持 macOS 和 Windows，免费下载。";
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://zhiliu.ai" />
+    <meta property="og:image" content="https://zhiliu.ai/screenshots/仪表盘.png" />
+    <meta property="og:image:width" content="720" />
+    <meta property="og:image:height" content="450" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://zhiliu.ai/screenshots/仪表盘.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "职流",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "macOS, Windows",
+      "description": description,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" }
+    })} />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Scroll-driven animations
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        }
+      }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+      document.querySelectorAll("[data-animate]").forEach((el) => observer.observe(el));
+
+      // Stagger children - observe stagger containers and cascade children
+      const staggerObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const children = entry.target.querySelectorAll("[data-animate]");
+            children.forEach((child, i) => {
+              child.style.transitionDelay = `${i * 80}ms`;
+              child.classList.add("visible");
+            });
+            staggerObserver.unobserve(entry.target);
+          }
+        }
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll(".stagger-children").forEach((el) => staggerObserver.observe(el));
+    </script>
+  </body>
+</html>

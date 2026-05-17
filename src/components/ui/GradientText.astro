@@ -1,0 +1,12 @@
+---
+const { as: Tag = "h2", class: className = "" } = Astro.props;
+---
+
+<Tag
+  class:list={[
+    "gradient-text font-heading font-bold tracking-tight",
+    className,
+  ]}
+>
+  <slot />
+</Tag>
